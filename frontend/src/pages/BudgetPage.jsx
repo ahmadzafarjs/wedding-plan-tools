@@ -43,7 +43,12 @@ export default function BudgetPage() {
   return (
     <section className="flex gap-10">
       <div className="w-[30%]">
-        <BudgetAside setParams={setParams} data={data} isLoading={isLoading} />
+        <BudgetAside
+          setParams={setParams}
+          data={data}
+          isLoading={isLoading}
+          refetch={refetch}
+        />
       </div>
       <div className="w-[70%]">
         {paramsQuery ? (

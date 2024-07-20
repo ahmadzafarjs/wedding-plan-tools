@@ -11,18 +11,15 @@ const guestSchema = {
   },
   ageCategory: {
     type: String,
-    enum: ["Adult", "Child", "Baby"],
   },
   gender: {
     type: String,
-    enum: ["Male", "Female", "Other"],
   },
   group: {
     type: String,
   },
   menu: {
     type: String,
-    enum: ["Adults", "Children", "No menu", "Other"],
   },
 };
 

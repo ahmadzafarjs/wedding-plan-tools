@@ -71,7 +71,7 @@ app.post("/signup", async (req, res) => {
 
     const saveUser = await newUser.save();
 
-    res.status(200).json({
+    return res.status(200).json({
       message: "success",
       user: saveUser,
     });
@@ -90,14 +90,14 @@ app.post("/login", async (req, res) => {
     const { email, password } = data;
     const checkUser = await User.findOne({ email: email });
     if (!checkUser) {
-      res.status(400).json({
+      return res.status(400).json({
         message: "User not found! Register please",
       });
     }
 
     const verifyPassword = bcrypt.compare(password, checkUser.password);
     if (!verifyPassword) {
-      res.status(400).json({
+      return res.status(400).json({
         message: "Password not match",
       });
     }
@@ -110,7 +110,7 @@ app.post("/login", async (req, res) => {
       "my_secret_key"
     );
 
-    res.status(200).json({
+    return res.status(200).json({
       message: "success",
       user: checkUser,
       token: token,
@@ -420,19 +420,22 @@ app.post("/guest", async (req, res) => {
     const { token, name, ageCategory, group, gender, menu } = data;
     const user = verifyToken(token);
 
-    const newGuest = new Guest({
+    // console.log(data);
+    // console.log(user.id);
+
+    const newGuest = await Guest.create({
       userId: user.id,
-      name,
-      ageCategory,
-      group,
-      gender,
-      menu,
+      name: name,
+      ageCategory: ageCategory,
+      group: group,
+      gender: gender,
+      menu: menu,
     });
-    const saveUser = await newGuest.save();
+    // const saveUser = await newGuest.save();
 
     res.status(200).json({
       message: "success",
-      guest: saveUser,
+      guest: newGuest,
     });
   } catch (error) {
     res.status(200).json({

@@ -58,14 +58,9 @@ export default function Guestlist() {
       const token = localStorage.getItem("token");
       const res = await axios.post("http://localhost:3000/guest", {
         token: token,
-        // name: newGuestData.name,
-        // ageCategory: newGuestData.ageCategory,
-        // gender: newGuestData.gender,
-        // group: newGuestData.group,
-        // menu: newGuestData.menu,
         ...newGuestData,
       });
-      const data = await res.data;
+      const data = await res.data.guest;
       return data;
     },
     onSuccess: () => {
@@ -78,7 +73,8 @@ export default function Guestlist() {
   function handleNewGuest(e) {
     e.preventDefault();
     mutate(newGuest);
-    setGuests([...guests, newGuest]); // Add newGuest to guestList
+    console.log(newGuest);
+    setGuests([...guests, { ...newGuest }]); // Add newGuest to guestList
     document.getElementById("my_modal_3").close();
   }
 

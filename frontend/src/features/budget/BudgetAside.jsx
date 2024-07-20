@@ -69,7 +69,7 @@ import toast from "react-hot-toast";
 //   { name: "Other", amount: 90976, expenses: [] },
 // ];
 
-export default function BudgetAside({ setParams, data }) {
+export default function BudgetAside({ setParams, data, refetch }) {
   const [categories, setCategories] = useState([]);
   const [newCategory, setNewCategory] = useState();
   const [searchParams, setSearchParams] = useSearchParams();
